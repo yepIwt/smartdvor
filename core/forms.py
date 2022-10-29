@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Post
 from django import forms
 import datetime
 
@@ -97,4 +97,20 @@ class LoginForm(forms.Form):
 		if not username_taken:
 			raise forms.ValidationError({'username':["Такого ника нет."]})
 		
+		return self.cleaned_data
+
+class PostForm(forms.Form):
+	post_title = forms.CharField(label = "Название поста", max_length = 200)
+	post_text = forms.CharField(label = "Текст поста", max_length = 400)
+
+	class Meta:
+		model = Post
+		fields = (
+			'__all__'
+		)
+	
+	def clean(self):
+		post_title = self.cleaned_data['post_title']
+		post_text = self.cleaned_data['post_text']
+
 		return self.cleaned_data

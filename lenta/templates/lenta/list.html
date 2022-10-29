@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    Лента
+{% endblock %}
+
+{% block content %}
+
+    {% if posts %}
+    
+        {% for p in posts %}
+            <hr>
+            <h2><a href = "{% url 'lenta:view_post' p.id %}" >{{p.post_title}}</a></h2>
+            <h4> {{p.post_text}} </h4>
+            <h5> <a href = "{% url 'frontend:user' p.post_author.username %}" >Автор: {{p.post_author.username}}</a></h5>
+            <h5> Дата создания: {{p.pub_date}}</h5>
+            <hr>
+        {% endfor %}
+
+    {% else %}
+        <h1>Лента пустая</h1>
+    {% endif %}
+
+{% endblock %}

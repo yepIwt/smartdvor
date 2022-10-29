@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Лента
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+        <form  method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Постнуть!</button>
+        </form>
+
+    {% else %}
+
+        <h1>Вы не вошли!</h1>
+    
+    {% endif %}
+
+{% endblock %}
