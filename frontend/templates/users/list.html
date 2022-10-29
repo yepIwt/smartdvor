@@ -8,11 +8,13 @@
     <h1>Зарегистрированны:</h1>
     {% if users %}
         {% for user2 in users %}
-            {% if user.username == user2.username %}
-                <h2 style="color: green">{{user2.username}}</h2>
-            {% else %}
-                <h2>{{user2.username}}</h2>
-            {% endif %}
+            <a href = "{% url 'frontend:user' user2.username %}">
+                {% if user.username == user2.username %}
+                    <h2 style="color: green">{{user2.username}}</h2>
+                {% else %}
+                    <h2>{{user2.username}}</h2>
+                {% endif %}
+            </a>
         {% endfor %}
     {% else %}
         <h2>Нет пользователей</h2>

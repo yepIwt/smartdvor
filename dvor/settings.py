@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'frontend',
-    'lenta'
+    'lenta',
+    'services',
 ]
 
 MIDDLEWARE = [

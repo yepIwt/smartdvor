@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Profile, Post, PostComment
+from .models import Profile, Post, PostComment, Service
 from django import forms
 import datetime
 
@@ -127,3 +127,24 @@ class CommentForm(forms.Form):
 	def clean(self):
 		comment_text = self.cleaned_data['comment_text']
 		return self.cleaned_data
+
+class ServiceForm(forms.Form):
+	comment = forms.CharField(label = "Комментарий к заявке", max_length = 100)
+	
+	services_types = (
+		('Вызвать сантехника', 'Вызвать сантехника'),
+		('Вызвать газовика', 'Вызвать газовика'),
+		('Вызвать авайрийку', 'Вызвать авайрийку'),
+	)
+
+	serivice_type = forms.ChoiceField(choices = services_types)
+
+	class Meta:
+		model = Service
+		fields = (
+			'__all__'
+		)
+	
+	def clean(self):
+		comment = self.cleaned_data['comment']
+		serivice_type = self.cleaned_data['serivice_type']

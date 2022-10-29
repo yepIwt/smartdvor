@@ -38,6 +38,19 @@ class PostComment(models.Model):
 	def __str__(self):
 		return f"{self.comment_author.username}: {self.post.post_title} - {self.comment_text}"
 
+class Service(models.Model):
+	customer = models.ForeignKey(User, on_delete = models.CASCADE)
+	serivice_type = models.CharField("Название услуги", max_length = 50)
+	comment = models.CharField("Комментарий к услуге", max_length = 50)
+	pub_date = models.DateField("Дата запроса", default = datetime.date.today)
+	
+	status = models.BooleanField('Статус заявки', default = False)
+	comment_status = models.CharField("Комментарий к статусу", max_length = 50, default = "Отправлена")
+
+	def __str__(self):
+		return f"{self.customer.username}: {self.serivice_type} - {self.comment}"
+	
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
 	if created:

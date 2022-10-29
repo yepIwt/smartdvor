@@ -6,8 +6,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
 
 
-from core.models import Profile
-from core.forms import RegistrationForm, CompleteRegistrationForm, LoginForm
+from core.models import Profile, Service
+from core.forms import RegistrationForm, CompleteRegistrationForm, LoginForm, ServiceForm
 
 # Create your views here. Okay.
 
@@ -73,3 +73,24 @@ def login_page(request):
 def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect(reverse("frontend:all_users"))
+
+def user_requests(request, username):
+	
+	try:
+		u = User.objects.get(username__exact = request.user)
+	except:
+		raise HttpResponse("<h1>Авторизуйтесь</h1>")
+
+	requests = u.service_set.order_by('-id')
+	print(requests)
+	
+	form = ServiceForm(request.POST or None)
+	if request.POST and form.is_valid():
+
+		comment = form.cleaned_data['comment']
+		serivice_type = form.cleaned_data['serivice_type']
+
+		r = Service(customer = u, serivice_type = serivice_type, comment = comment)
+		r.save()
+
+	return render(request, "requests/my.html", {"form": form, 'requests': requests})

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	Мои заявки
+{% endblock %}
+
+{% block content%}
+    <h1>Ваши заявки, {{user.username}}</h1>
+    {% if requests %}
+        {% for r in requests %} 
+            <hr>
+            <h2>Заказчик: {{r.customer.username}}</h2>
+            <p>Адрес: {{r.customer.profile.address}}</p>
+            <p>Тип заявки: {{r.serivice_type}}</p>
+            <p>Комментарий к заявке: {{r.comment}}</p>
+            <p>Дата заявки: {{r.pub_date}}</p>
+            <p>
+                Статус заявки: 
+                {% if r.status %}
+                    Выполнена
+                {% else %}
+                    Невыполнена
+                {% endif %}
+            </p>
+            <p>Комментарий к статусу: {{r.comment_status}}</p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h5>Нет заявок</h5>
+    {% endif %}
+    <hr>
+    <hr>
+    <h1>Создать заявку</h1>
+    <form  method="POST">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit">Создать!</button>
+    </form>
+
+{% endblock %}

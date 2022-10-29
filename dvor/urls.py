@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('frontend.urls')),
     path('api/', include('api.urls')),
-    path('lenta/', include('lenta.urls'))
+    path('lenta/', include('lenta.urls')),
+    path('services/', include('services.urls'))
 ]
