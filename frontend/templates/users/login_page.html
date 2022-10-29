@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Страница входа
+{% endblock %}
+
+{% block content%}
+    <h1>Вход</h1>
+    <form  method="POST">
+        {% csrf_token %}
+
+        {% if err %}
+            <p>Неправильный логин или пароль</p>
+        {% endif %}
+
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+{% endblock %}
