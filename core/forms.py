@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Profile, Post
+from .models import Profile, Post, PostComment
 from django import forms
 import datetime
 
@@ -113,4 +113,17 @@ class PostForm(forms.Form):
 		post_title = self.cleaned_data['post_title']
 		post_text = self.cleaned_data['post_text']
 
+		return self.cleaned_data
+
+class CommentForm(forms.Form):
+	comment_text = forms.CharField(label = "Текст комментария", max_length = 100)
+
+	class Meta:
+		model = PostComment
+		fields = (
+			'__all__'
+		)
+	
+	def clean(self):
+		comment_text = self.cleaned_data['comment_text']
 		return self.cleaned_data

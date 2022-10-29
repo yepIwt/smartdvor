@@ -32,6 +32,7 @@ class Post(models.Model):
 class PostComment(models.Model):
 	post = models.ForeignKey(Post, on_delete = models.CASCADE)
 	comment_author = models.ForeignKey(User, on_delete = models.CASCADE)
+	pub_date = models.DateField("Дата создания комментария", default = datetime.date.today)
 	comment_text = models.CharField("Текст комментария", max_length = 200)
 
 	def __str__(self):

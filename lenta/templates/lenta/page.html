@@ -7,8 +7,31 @@
 {% block content %}
 
     <hr>
+    <h1>{{post.post_title}}</h1>
     <h4> {{post.post_text}} </h4>
     <h5> Автор: {{post.post_author.username}} </h5>
     <h5> Дата создания: {{post.pub_date}} </h5>
+    <hr>
+    <h1>Комментарии</h1>
+    {% if comments %}
+        {% for c in comments %}
+            <hr>
+            <h4>Автор: {{c.comment_author.username}}</h4>
+            <h5>Текст: {{c.comment_text}} </h5>
+            <h5>Дата создания комментария: {{c.pub_date}}</h5>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h4>А комментариев то нет!</h4>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <form  method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Комментнуть!</button>
+        </form>
+    {% endif %}
+    <hr>
 
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{post.post_title}}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{post.post_title}}</h1>
+
+    {% if comments%}
+
+        {% for c in comments %}
+            <hr>
+            <h4>Автор: {{c.comment_author.username}}</h4>
+            <h5>Текст: {{c.comment_text}} </h5>
+            <h5>Дата создания комментария: {{c.pub_date}}</h5>
+            <hr>
+        {% endfor %}
+
+    {% else %}
+        <h4>Без комментариев</h4>
+    {% endif %}
+
+{% endblock %}
