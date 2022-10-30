@@ -6,6 +6,7 @@
 
 {% block content%}
     <h1>Чаты</h1>
+    <a href = "{% url 'chats:create_chat' %}">Создать чат</a>
     {% if chats %}
         {% for c in chats %}
             <hr>
