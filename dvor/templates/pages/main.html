@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	Главная страница
+{% endblock %}
+
+{% block content%}
+    <p style = "font-size: 88px; text-align: center;">Умный двор</p>
+    <div style="font-size: 40px; padding-left: 30%;">
+        <p><a href = "{% url 'frontend:all_users' %}">Users/</a></p>
+        <p><a href = "{% url 'api:token_obtain_pair' %}">Api/</a></p>
+        <p><a href = "{% url 'lenta:lenta_scroll' %}">Lenta/</a></p>
+        <p><a href = "{% url 'services:list_services' %}">Services/</a></p>
+        <p><a href = "{% url 'chats:list_chats' %}">Chats/</a></p>
+    </div>
+{% endblock %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'lenta',
     'services',
     'chats',
+    'dvor'
 ]
 
 MIDDLEWARE = [
