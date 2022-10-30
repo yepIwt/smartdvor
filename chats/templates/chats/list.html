@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	Чаты доступные
+{% endblock %}
+
+{% block content%}
+    <h1>Чаты</h1>
+    {% if chats %}
+        {% for c in chats %}
+            <hr>
+            <h2>Название чата: <a href = "{% url 'chats:chat_view' c.id %}">{{c.chat_title}}</a></h2>
+            <h4><a href = "{% url 'chats:add_user_to_chat' c.id %}">Войти</a></h4>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h1>Нет чатов ваще никаких</h1>
+    {% endif %}
+
+{% endblock %}

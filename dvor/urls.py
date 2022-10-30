@@ -21,5 +21,6 @@ urlpatterns = [
     path('users/', include('frontend.urls')),
     path('api/', include('api.urls')),
     path('lenta/', include('lenta.urls')),
-    path('services/', include('services.urls'))
+    path('services/', include('services.urls')),
+    path('chats/', include('chats.urls'))
 ]

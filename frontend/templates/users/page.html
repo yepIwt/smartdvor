@@ -31,4 +31,15 @@
 	</p>
 	<p> Дата рождения: {{ usr.profile.bthd }}</p>
 	<b>Дата регистрации: </b> {{ usr.date_joined}}
+	<hr>
+	<h1>Чаты:</h1>
+	{% if user.username == usr.username %}
+		{% if chats %}
+			{% for c in chats %}
+				<p><a href = "{% url 'chats:chat_view' c.id %}">{{c.chat_title}}</a></p>
+			{% endfor %}
+		{% else %}
+			Нет чатов!
+		{% endif %}
+	{% endif %}
 {% endblock %}

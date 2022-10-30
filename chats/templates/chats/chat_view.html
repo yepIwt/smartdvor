@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	{{c.chat_title}}
+{% endblock %}
+
+{% block content%}
+    <h1>Название чата: {{chat.chat_title}} </h1>
+    <h3>Участники чата: </h3>
+    
+    {% for m in members%}
+        <p>{{m}}</p>
+    {% endfor %}
+
+    <hr>
+    <h1>Сообщения</h1>
+
+    {% if msgs %}
+        {% for m in msgs %}
+            <h2>{{m.message_author.username}}</h2>
+            <b>{{m.message_text}}</b>
+            <p>{{m.when}}</p>
+        {% endfor %}
+        <hr>    
+    {% else %}
+        А сообщений то нет!
+    {% endif %}
+
+
+    <h1>Написать сообщение от имени: {{u.username}}</h1>
+    <form  method="POST">
+	    {% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit">Твитнуть!</button>
+    </form>
+    <hr>
+
+{% endblock %}

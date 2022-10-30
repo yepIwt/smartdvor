@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
+from chats.models import Chat
 
 
 from core.models import Profile, Service
@@ -52,8 +53,18 @@ def user(request, username):
 	except:
 		return HttpResponse('<h1>Такого пользователя не существует</h1>')
 
-	contex = {'usr': user}
-	return render(request,'users/page.html',contex)
+	# Ради бога, это-же хакатон!
+	chats = Chat.objects.all()
+
+	my_chats = []
+	for c in chats:
+		members = c.members.split("|")[:-1]
+		if request.user.username in members:
+			my_chats.append(c)
+	
+	contex = {'usr': user, 'chats': my_chats}
+
+	return render(request, 'users/page.html', contex)
 
 def login_page(request):
 
