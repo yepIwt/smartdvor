@@ -7,9 +7,11 @@
 {% block content%}
 
 	{% if user.username == usr.username %}
-		<h1>Это вы!</h1>
-		<a href="{% url 'frontend:logout_page' %}">Выйти</a>
-		<br>
+		<ul>
+			<h2>Это вы!</h2>
+			<a href="{% url 'frontend:logout_page' %}">Выйти</a>
+			<a href = "{% url 'frontend:user_requests' user.username%}">Услуги</a>
+		</ul>
 	{% endif %}
 
 	{% if usr.profile.online %}
