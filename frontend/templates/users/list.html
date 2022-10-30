@@ -6,10 +6,12 @@
 
 {% block content%}
     <p style = "font-size: 66px; text-align: center;">Все пользователи</p>
-    
-        <a href = "{% url 'frontend:login_page' %}" style = "font-size: 44px; text-align: center; padding-left: 30%;" >Войти</a>
-        <a href = "{% url 'frontend:registration' %}" style = "font-size: 44px; text-align: center; padding-left: 5%;">Зарегистрироваться</a>
-    
+        {% if user.is_authenticated %}
+            <p style = "font-size: 34px; text-align: center; ">Вы вошли как <a href = "{% url 'frontend:user' user.username %}">{{user.username}}</a></p>
+        {% else%}
+            <a href = "{% url 'frontend:login_page' %}" style = "font-size: 44px; text-align: center; padding-left: 30%;" >Войти</a>
+            <a href = "{% url 'frontend:registration' %}" style = "font-size: 44px; text-align: center; padding-left: 5%;">Зарегистрироваться</a>
+        {% endif %}
     <div style="font-size: 22px; padding-left: 40%;">
         {% if users %}
             {% for user2 in users %}

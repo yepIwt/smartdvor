@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <h3><a href = "{% url 'lenta:create_post' %}">Создать пост</a></h3>
+    {% endif %}
 
     {% if posts %}
     
